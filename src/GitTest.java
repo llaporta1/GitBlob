@@ -12,6 +12,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -98,7 +99,8 @@ class GitTest {
 		indexCorrect += ("testFile1 : c3499c2729730a7f807efb8676a92dcb6f8a3f8f");
 		indexCorrect += ("\ntestFile2 : 4bcc88817a8cbd2f6475a0388641a12fa6f867b3");
 		indexCorrect += ("\ntestFile3 : 47256718d66bfd6fab611ca13515f0833cc4f934");
-		
+//		System.out.println(indexTest);
+//		System.out.println(indexCorrect);
 		assertEquals(indexTest,indexCorrect);
 		
 		
@@ -126,18 +128,23 @@ class GitTest {
 	
 	public String getFileString(String fileName) throws IOException
 	{
-	FileInputStream fstream = new FileInputStream("index.txt");
+	FileInputStream fstream = new FileInputStream(fileName);
 	BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
 	String strLine = "";
-	String str = "";
+	ArrayList<String> list = new ArrayList<String>();
 
 	//Read File Line By Line
 	while ((strLine = br.readLine()) != null)   {
 	  // Print the content on the console - do what you want to do
-	  str += strLine;
+	  list.add(strLine);
 	}
-		return str;
+	String listString="";
+	int i;
+	for(i = 0;i < list.size() - 1;i++) {
+	    listString += list.get(i) + "\n";
 	}
-
+	listString += list.get(i);
+	return listString;
+	}
 }
